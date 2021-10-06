@@ -6,6 +6,7 @@ package turnpike
 
 import (
 	//	"code.google.com/p/go.net/websocket"
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"golang.org/x/net/websocket"
@@ -330,22 +331,22 @@ func (c *Client) send() {
 	}
 }
 
-func (c *Client) ConnectWithHeaders(server, origin string, headers map[string]string) error {
-	return c.connect(server, origin, headers)
+func (c *Client) ConnectWithHeaders(server, origin string, headers map[string]string, TlsConfig *tls.Config) error {
+	return c.connect(server, origin, headers, TlsConfig)
 }
 
 // Connect will connect to server with an optional origin.
 // More details here: http://godoc.org/code.google.com/p/go.net/websocket#Dial
 func (c *Client) Connect(server, origin string) error {
-	return c.connect(server, origin, nil)
+	return c.connect(server, origin, nil, nil)
 }
 
-func (c *Client) connect(server, origin string, headers map[string]string) error {
+func (c *Client) connect(server, origin string, headers map[string]string, TlsConfig *tls.Config) error {
 	if debug {
 		log.Print("turnpike: connect")
 	}
 	var err error
-	if c.ws, err = c.dialWithHeaders(server, wampProtocolId, origin, headers); err != nil {
+	if c.ws, err = c.dialWithHeaders(server, wampProtocolId, origin, headers, TlsConfig); err != nil {
 		return fmt.Errorf("Error connecting to websocket server: %s", err)
 	}
 
@@ -363,7 +364,7 @@ func (c *Client) connect(server, origin string, headers map[string]string) error
 	return nil
 }
 
-func (c *Client) dialWithHeaders(url_, protocol, origin string, headers map[string]string) (ws *websocket.Conn, err error) {
+func (c *Client) dialWithHeaders(url_, protocol, origin string, headers map[string]string, TlsConfig *tls.Config) (ws *websocket.Conn, err error) {
 	config, err := websocket.NewConfig(url_, origin)
 	if err != nil {
 		return nil, err
@@ -375,6 +376,9 @@ func (c *Client) dialWithHeaders(url_, protocol, origin string, headers map[stri
 		for key, val := range headers {
 			config.Header.Add(key, val)
 		}
+	}
+	if TlsConfig != nil {
+		config.TlsConfig = TlsConfig
 	}
 	return websocket.DialConfig(config)
 }
