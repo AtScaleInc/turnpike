@@ -5,7 +5,7 @@ Go implementation of [WAMP](http://www.wamp.ws/) - The Websocket Application Mes
 
 Turnpike provides a WAMP server and client.
 
-[![Build Status](https://drone.io/github.com/mattbaird/turnpike/status.png)](https://drone.io/github.com/mattbaird/turnpike/latest)
+[![Build Status](https://drone.io/github.com/AtScaleInc/turnpike/status.png)](https://drone.io/github.com/AtScaleInc/turnpike/latest)
 
 Examples
 ========

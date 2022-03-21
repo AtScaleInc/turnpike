@@ -1,7 +1,7 @@
 package turnpike_test
 
 import (
-	"github.com/mattbaird/turnpike"
+	"github.com/AtScaleInc/turnpike"
 )
 
 func ExampleClient_NewClient() {

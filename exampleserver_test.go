@@ -1,8 +1,9 @@
 package turnpike_test
 
 import (
-	"github.com/mattbaird/turnpike"
 	"net/http"
+
+	"github.com/AtScaleInc/turnpike"
 )
 
 func ExampleServer_NewServer() {
