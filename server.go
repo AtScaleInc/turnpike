@@ -88,6 +88,7 @@ type PubHandler func(topicURI string, event interface{}) interface{}
 
 // NewServer creates a new WAMP server.
 func NewServer(isDebug bool) *Server {
+	log.Printf("Im here, debug is %t", debug)
 	debug = isDebug
 	s := &Server{
 		clients:       cmap.New(),
@@ -188,6 +189,7 @@ func (t *Server) SubscribedTopicUris() []string {
 
 // HandleWebsocket implements the go.net/websocket.Handler interface.
 func (t *Server) HandleWebsocket(conn *websocket.Conn) {
+	log.Print("Handlewebsock")
 	defer conn.Close()
 
 	if debug {
