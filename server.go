@@ -7,11 +7,6 @@ package turnpike
 import (
 	"encoding/json"
 	"fmt"
-
-	uuid "github.com/nu7hatch/gouuid"
-	cmap "github.com/streamrail/concurrent-map"
-
-	// "golang.org/x/net/websocket"
 	"io"
 	"log"
 	"net"
@@ -20,7 +15,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/gorilla/websocket"
+	uuid "github.com/nu7hatch/gouuid"
+	cmap "github.com/streamrail/concurrent-map"
+	"golang.org/x/net/websocket"
 )
 
 var (
