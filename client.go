@@ -359,9 +359,9 @@ func (c *Client) connect(server, origin string, headers map[string]string, TlsCo
 	}
 
 	// Receive welcome message
-	if err = c.receiveWelcome(); err != nil {
-		return err
-	}
+	// if err = c.receiveWelcome(); err != nil {
+	// 	return err
+	// }
 	if debug {
 		log.Printf("turnpike: connected to server: %s", server)
 	}
