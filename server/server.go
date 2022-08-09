@@ -11,7 +11,8 @@ import (
 	"net/http"
 
 	"github.com/AtScaleInc/turnpike"
-	"golang.org/x/net/websocket"
+	// "golang.org/x/net/websocket"
+	"github.com/gorilla/websocket"
 )
 
 func main() {

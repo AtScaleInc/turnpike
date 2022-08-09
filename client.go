@@ -9,10 +9,11 @@ import (
 	"crypto/tls"
 	"encoding/json"
 	"fmt"
-	"golang.org/x/net/websocket"
 	"io"
 	"log"
 	"math/rand"
+
+	"golang.org/x/net/websocket"
 )
 
 const (
@@ -225,9 +226,15 @@ func (c *Client) receiveWelcome() error {
 		log.Print("turnpike: receive welcome")
 	}
 	var rec string
+
 	err := websocket.Message.Receive(c.ws, &rec)
 	if err != nil {
-		return fmt.Errorf("Error receiving welcome message [%s]: %s", rec, err)
+		log.Printf("Error receiving welcome message [%s]: %s", rec, err)
+		log.Printf("Ah is there anything in here %s", rec)
+	}
+	err = websocket.Message.Receive(c.ws, &rec)
+	if err != nil {
+		log.Printf("Error receiving welcome message [%s]: %s", rec, err)
 	}
 	if typ := parseMessageType(rec); typ != msgWelcome {
 		return fmt.Errorf("First message received was not welcome, instead received: %s", rec)

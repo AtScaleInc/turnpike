@@ -3,6 +3,7 @@ module github.com/AtScaleInc/turnpike
 go 1.17
 
 require (
+	github.com/gorilla/websocket v1.5.0
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 	github.com/streamrail/concurrent-map v0.0.0-20160823150647-8bf1e9bacbf6
 	github.com/stretchrcom/testify v1.4.0
