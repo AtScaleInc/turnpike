@@ -234,7 +234,8 @@ func (c *Client) receiveWelcome() error {
 	}
 	err = websocket.Message.Receive(c.ws, &rec)
 	if err != nil {
-		log.Printf("Error receiving welcome message [%s]: %s", rec, err)
+		log.Printf("Error receiving welcome message 2 [%s]: %s", rec, err)
+		log.Printf("Ah is there anything in here 2 %s", rec)
 	}
 	if typ := parseMessageType(rec); typ != msgWelcome {
 		return fmt.Errorf("First message received was not welcome, instead received: %s", rec)
