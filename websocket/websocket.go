@@ -332,6 +332,13 @@ again:
 	frame, err := ws.frameReaderFactory.NewFrameReader()
 	if err != nil {
 		log.Printf("in Newframereader")
+		// hybiFrameReader
+		br := bufio.NewReader(ws)
+		bw := bufio.NewWriter(ws)
+		buf := bufio.NewReadWriter(br, bw)
+		frf := hybiFrameReaderFactory{buf.Reader}
+		_, er := frf.NewFrameReader()
+		log.Printf("hybiPrint %s", er)
 		return err
 	}
 	frame, err = ws.frameHandler.HandleFrame(frame)
