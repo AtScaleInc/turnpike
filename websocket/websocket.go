@@ -15,6 +15,7 @@ import (
 	"errors"
 	"io"
 	"io/ioutil"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -316,6 +317,7 @@ func (cd Codec) Send(ws *Conn, v interface{}) (err error) {
 
 // Receive receives single frame from ws, unmarshaled by cd.Unmarshal and stores in v.
 func (cd Codec) Receive(ws *Conn, v interface{}) (err error) {
+	log.Printf("In Receive")
 	ws.rio.Lock()
 	defer ws.rio.Unlock()
 	if ws.frameReader != nil {
