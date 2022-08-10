@@ -354,17 +354,23 @@ again:
 		return ErrFrameTooLarge
 	}
 	payloadType := frame.PayloadType()
+	// buf := make([]byte, 1024)
+	// data, err := io.ReadFull(frame, buf)
 	data, err := ioutil.ReadAll(frame)
 	if err != nil {
+		log.Printf("In err1")
 		return err
 	}
 	_, err = b.Write(data)
 	if err != nil {
+		log.Printf("In err2")
 		return err
 	}
 	if !frame.(*hybiFrameReader).header.Fin {
+		log.Printf("IN header")
 		goto again
 	}
+	log.Printf("payloadType %s, b.Bytes: %s", string(payloadType), b.Bytes())
 	return cd.Unmarshal(b.Bytes(), payloadType, v)
 }
 
