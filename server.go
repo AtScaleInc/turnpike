@@ -17,7 +17,9 @@ import (
 
 	uuid "github.com/nu7hatch/gouuid"
 	cmap "github.com/streamrail/concurrent-map"
-	"golang.org/x/net/websocket"
+
+	// "golang.org/x/net/websocket"
+	"github.com/AtScaleInc/turnpike/websocket"
 )
 
 var (

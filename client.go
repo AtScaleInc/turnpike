@@ -13,7 +13,8 @@ import (
 	"log"
 	"math/rand"
 
-	"golang.org/x/net/websocket"
+	// "golang.org/x/net/websocket"
+	"github.com/AtScaleInc/turnpike/websocket"
 )
 
 const (
@@ -353,6 +354,7 @@ func (c *Client) connect(server, origin string, headers map[string]string, TlsCo
 		return fmt.Errorf("Error connecting to websocket server: %s", err)
 	}
 
+	// c.ws.SetDeadline()
 	// Receive welcome message
 	if err = c.receiveWelcome(); err != nil {
 		return err
