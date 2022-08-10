@@ -331,10 +331,12 @@ func (cd Codec) Receive(ws *Conn, v interface{}) (err error) {
 again:
 	frame, err := ws.frameReaderFactory.NewFrameReader()
 	if err != nil {
+		log.Printf("in Newframereader")
 		return err
 	}
 	frame, err = ws.frameHandler.HandleFrame(frame)
 	if err != nil {
+		log.Printf("in handleFrame")
 		return err
 	}
 	if frame == nil {
