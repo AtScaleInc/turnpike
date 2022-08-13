@@ -116,12 +116,14 @@ type hybiFrameReaderFactory struct {
 // See Section 5.2 Base Framing protocol for detail.
 // http://tools.ietf.org/html/draft-ietf-hybi-thewebsocketprotocol-17#section-5.2
 func (buf hybiFrameReaderFactory) NewFrameReader() (frame frameReader, err error) {
+	log.Print("Newframereader")
 	hybiFrame := new(hybiFrameReader)
 	frame = hybiFrame
 	var header []byte
 	var b byte
 	// First byte. FIN/RSV1/RSV2/RSV3/OpCode(4bits)
 	b, err = buf.ReadByte()
+	log.Print("a asd ", b)
 	if err != nil {
 		return
 	}
@@ -135,6 +137,7 @@ func (buf hybiFrameReaderFactory) NewFrameReader() (frame frameReader, err error
 
 	// Second byte. Mask/Payload len(7bits)
 	b, err = buf.ReadByte()
+	log.Print("b asd ", b)
 	if err != nil {
 		return
 	}
@@ -152,6 +155,7 @@ func (buf hybiFrameReaderFactory) NewFrameReader() (frame frameReader, err error
 	}
 	for i := 0; i < lengthFields; i++ {
 		b, err = buf.ReadByte()
+		log.Print("c asd ", b)
 		if err != nil {
 			return
 		}
@@ -550,7 +554,7 @@ func Origin(config *Config, req *http.Request) (*url.URL, error) {
 }
 
 func (c *hybiServerHandshaker) AcceptHandshake(buf *bufio.Writer) (err error) {
-	log.Print("Handlewebsock")
+	log.Print("acceptHandshake")
 	if len(c.Protocol) > 0 {
 		if len(c.Protocol) != 1 {
 			// You need choose a Protocol in Handshake func in Server.

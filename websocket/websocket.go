@@ -331,17 +331,16 @@ func (cd Codec) Receive(ws *Conn, v interface{}) (err error) {
 	var b bytes.Buffer
 again:
 	log.Printf(reflect.TypeOf(ws.frameReaderFactory).String())
-	log.Printf(reflect.TypeOf(ws.frameReader).String())
 	frame, err := ws.frameReaderFactory.NewFrameReader()
 	if err != nil {
 		log.Printf("in Newframereader")
 		// hybiFrameReader
-		br := bufio.NewReader(ws)
-		bw := bufio.NewWriter(ws)
-		buf := bufio.NewReadWriter(br, bw)
-		frf := hybiFrameReaderFactory{buf.Reader}
-		_, er := frf.NewFrameReader()
-		log.Printf("hybiPrint %s", er)
+		// br := bufio.NewReader(ws)
+		// bw := bufio.NewWriter(ws)
+		// buf := bufio.NewReadWriter(br, bw)
+		// frf := hybiFrameReaderFactory{buf.Reader}
+		// _, er := frf.NewFrameReader()
+		// log.Printf("hybiPrint %s", er)
 		return err
 	}
 	frame, err = ws.frameHandler.HandleFrame(frame)
