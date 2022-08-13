@@ -7,6 +7,7 @@ package websocket
 import (
 	"bufio"
 	"io"
+	"log"
 	"net"
 	"net/http"
 	"net/url"
@@ -43,11 +44,13 @@ func NewClient(config *Config, rwc io.ReadWriteCloser) (ws *Conn, err error) {
 	br := bufio.NewReader(rwc)
 	bw := bufio.NewWriter(rwc)
 	err = hybiClientHandshake(config, br, bw)
+
 	if err != nil {
 		return
 	}
 	buf := bufio.NewReadWriter(br, bw)
 	ws = newHybiClientConn(config, buf, rwc)
+	log.Print("newClient")
 	return
 }
 

@@ -338,6 +338,7 @@ func (handler *hybiFrameHandler) WritePong(msg []byte) (n int, err error) {
 
 // newHybiConn creates a new WebSocket connection speaking hybi draft protocol.
 func newHybiConn(config *Config, buf *bufio.ReadWriter, rwc io.ReadWriteCloser, request *http.Request) *Conn {
+	log.Print("New newHybiConn")
 	if buf == nil {
 		br := bufio.NewReader(rwc)
 		bw := bufio.NewWriter(rwc)
@@ -408,6 +409,7 @@ func getNonceAccept(nonce []byte) (expected []byte, err error) {
 
 // Client handshake described in draft-ietf-hybi-thewebsocket-protocol-17
 func hybiClientHandshake(config *Config, br *bufio.Reader, bw *bufio.Writer) (err error) {
+	log.Print("Im doing the handshake")
 	bw.WriteString("GET " + config.Location.RequestURI() + " HTTP/1.1\r\n")
 
 	// According to RFC 6874, an HTTP client, proxy, or other
@@ -443,6 +445,8 @@ func hybiClientHandshake(config *Config, br *bufio.Reader, bw *bufio.Writer) (er
 	}
 
 	resp, err := http.ReadResponse(br, &http.Request{Method: "GET"})
+	log.Print("Oh im here")
+	log.Print(resp)
 	if err != nil {
 		return err
 	}
@@ -477,6 +481,7 @@ func hybiClientHandshake(config *Config, br *bufio.Reader, bw *bufio.Writer) (er
 		}
 		config.Protocol = []string{offeredProtocol}
 	}
+	log.Print("After finishing handshake")
 
 	return nil
 }
@@ -493,6 +498,7 @@ type hybiServerHandshaker struct {
 }
 
 func (c *hybiServerHandshaker) ReadHandshake(buf *bufio.Reader, req *http.Request) (code int, err error) {
+	log.Print("ReadHandshake")
 	c.Version = ProtocolVersionHybi13
 	if req.Method != "GET" {
 		return http.StatusMethodNotAllowed, ErrBadRequestMethod
