@@ -19,6 +19,7 @@ import (
 	"net"
 	"net/http"
 	"net/url"
+	"reflect"
 	"sync"
 	"time"
 )
@@ -329,6 +330,8 @@ func (cd Codec) Receive(ws *Conn, v interface{}) (err error) {
 	}
 	var b bytes.Buffer
 again:
+	log.Printf(reflect.TypeOf(ws.frameReaderFactory).String())
+	log.Printf(reflect.TypeOf(ws.frameReader).String())
 	frame, err := ws.frameReaderFactory.NewFrameReader()
 	if err != nil {
 		log.Printf("in Newframereader")
