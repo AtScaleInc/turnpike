@@ -17,6 +17,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 	"strings"
@@ -549,6 +550,7 @@ func Origin(config *Config, req *http.Request) (*url.URL, error) {
 }
 
 func (c *hybiServerHandshaker) AcceptHandshake(buf *bufio.Writer) (err error) {
+	log.Print("Handlewebsock")
 	if len(c.Protocol) > 0 {
 		if len(c.Protocol) != 1 {
 			// You need choose a Protocol in Handshake func in Server.
