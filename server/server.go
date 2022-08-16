@@ -11,8 +11,8 @@ import (
 	"net/http"
 
 	"github.com/AtScaleInc/turnpike"
-	// "golang.org/x/net/websocket"
-	"github.com/AtScaleInc/turnpike/websocket"
+	"golang.org/x/net/websocket"
+	// "github.com/AtScaleInc/turnpike/websocket"
 	// "github.com/gorilla/websocket"
 )
 

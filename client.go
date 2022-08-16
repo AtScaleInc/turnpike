@@ -13,8 +13,8 @@ import (
 	"log"
 	"math/rand"
 
-	// "golang.org/x/net/websocket"
-	"github.com/AtScaleInc/turnpike/websocket"
+	"golang.org/x/net/websocket"
+	// "github.com/AtScaleInc/turnpike/websocket"
 )
 
 const (
